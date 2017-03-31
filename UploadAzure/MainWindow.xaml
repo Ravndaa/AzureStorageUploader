@@ -1,0 +1,44 @@
+﻿<Window x:Class="UploadAzure.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:UploadAzure"
+        mc:Ignorable="d"
+        Title="UploadToAzure" Height="354.805" Width="795.71">
+    <Grid>
+        <Button Content="Upload" Margin="0,0,10,14" Click="Button_Click" Height="20" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75"/>
+        <ListView Name="filer" Margin="10,39,10,90" SelectionChanged="filer_SelectionChanged">
+            <ListView.ContextMenu>
+                <ContextMenu Name="FileEditor" StaysOpen="true" Background="WhiteSmoke">
+                    <ContextMenu.BitmapEffect>
+                        <BitmapEffectGroup/>
+                    </ContextMenu.BitmapEffect>
+                    <MenuItem Header="Cancel Upload" Name="StopFileUpload" Click="StopFileUpload_Click"  />
+                    <MenuItem Header="Resume Upload" Name="ResumeFileUpload" Click="ResumeFileUpload_Click"  />
+                    <MenuItem Header="Remove" Name="RemoveFile" Click="RemoveItem_Click"  />
+
+                </ContextMenu>
+            </ListView.ContextMenu>
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" Width="120" DisplayMemberBinding="{Binding name}" />
+                    <GridViewColumn Header="Size" Width="120" DisplayMemberBinding="{Binding size}" />
+                    <GridViewColumn Header="Progress" Width="150">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ProgressBar Value="{Binding progress}" Width="130" Height="10" Maximum="{Binding size}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    <GridViewColumn Header="Status" Width="100" DisplayMemberBinding="{Binding status}" />
+                    <GridViewColumn Header="Message" Width="250" DisplayMemberBinding="{Binding message}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <Button Content="Browse" Margin="0,14,10,0" VerticalAlignment="Top" Click="Button_Click_1" HorizontalAlignment="Right" Width="75"/>
+        <TextBox Name="containerinfo" HorizontalAlignment="Left" Height="20" Margin="67,13,0,0" TextWrapping="Wrap" Text="crazyfile" VerticalAlignment="Top" Width="120"/>
+        <TextBlock HorizontalAlignment="Left" Margin="10,13,0,0" TextWrapping="Wrap" Text="Container" VerticalAlignment="Top" Height="20"/>
+
+    </Grid>
+</Window>
